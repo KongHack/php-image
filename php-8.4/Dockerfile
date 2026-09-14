@@ -1,4 +1,4 @@
-FROM php:8.4-fpm-bookworm
+FROM php:8.5-fpm-bookworm
 
 ARG APCU_VERSION=5.1.28
 ARG GNUPG_VERSION=1.5.4

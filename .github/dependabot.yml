@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: /php-8.4
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /php-8.5
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

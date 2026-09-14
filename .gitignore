@@ -1,0 +1,16 @@
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+.env
+.env.*
+!.env.example
+
+.composer/
+auth.json
+
+*.log
+tmp/
+

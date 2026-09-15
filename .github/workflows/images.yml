@@ -94,3 +94,47 @@ jobs:
           cache-to: type=gha,mode=max,scope=php-${{ matrix.php }}
           provenance: mode=max
           sbom: true
+
+  release:
+    name: Create GitHub release
+    if: github.ref_type == 'tag'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Extract release notes
+        shell: bash
+        run: |
+          notes_file="$RUNNER_TEMP/release-notes.md"
+
+          awk -v version="$GITHUB_REF_NAME" '
+            index($0, "## [" version "]") == 1 { found = 1; next }
+            found && /^## \[/ { exit }
+            found { print }
+            END { if (!found) exit 1 }
+          ' CHANGELOG.md > "$notes_file"
+
+          if [[ ! -s "$notes_file" ]]; then
+            echo "::error::No release notes found for $GITHUB_REF_NAME."
+            exit 1
+          fi
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            echo "GitHub release $GITHUB_REF_NAME already exists."
+            exit 0
+          fi
+
+          gh release create "$GITHUB_REF_NAME" \
+            --verify-tag \
+            --title "$GITHUB_REF_NAME" \
+            --notes-file "$RUNNER_TEMP/release-notes.md"

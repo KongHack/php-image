@@ -100,6 +100,8 @@ builds, and releases.
 
 - A build of the default branch updates `8.4` and `8.5`.
 - A Git tag such as `1.0.0` publishes `8.4-1.0.0` and `8.5-1.0.0`.
+- After both release images publish successfully, the workflow creates a GitHub
+  Release using the matching entry from `CHANGELOG.md`.
 - Release tags must never be moved or reused.
 
 After the first workflow publish, an organization owner must set the

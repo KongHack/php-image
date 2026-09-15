@@ -45,6 +45,7 @@ FROM ghcr.io/konghack/php:8.4
 - `README.md`, `SECURITY.md`, the MIT `LICENSE`, public-safe ignore files, Dependabot configuration, and a GHCR publishing workflow are present.
 - The workflow builds `linux/amd64` and `linux/arm64`, publishes compatibility tags from `main`, publishes release tags from bare semantic-version Git tags, and intentionally does not publish `latest`.
 - Release Git tags use bare semantic versions such as `1.0.0`, matching the repository's `VERSION` file and README version section.
+- After every release image in the build matrix publishes successfully, the workflow creates an idempotent GitHub Release using the matching `CHANGELOG.md` entry.
 - The compatibility images have been published publicly at `ghcr.io/konghack/php`.
 - Dependabot monitors GitHub Actions only; Docker base tags are refreshed by scheduled image builds instead of cross-version update pull requests.
 - A sensitive-string scan found no private organization names, internal infrastructure, credentials, tokens, or private filesystem paths.

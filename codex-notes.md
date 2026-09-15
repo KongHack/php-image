@@ -1,6 +1,6 @@
 # Codex Notes
 
-- Last updated: 2026-09-14 16:09 EDT
+- Last updated: 2026-09-15
 - Purpose: public-safe working memory for establishing the KongHack PHP container images.
 
 ## Goal
@@ -35,7 +35,7 @@ FROM ghcr.io/konghack/php:8.4
 
 ## Current Repository State
 
-- The repository has no commits yet.
+- The repository is public at `https://github.com/KongHack/php-image`.
 - The PHP 8.4 and 8.5 image sources have been prepared for public use.
 - Both source directories currently contain:
   - `Dockerfile`
@@ -43,9 +43,11 @@ FROM ghcr.io/konghack/php:8.4
   - `www.conf`
 - The Dockerfiles install the PHP and FPM configuration, pin PECL releases, and run build-time smoke checks.
 - `README.md`, `SECURITY.md`, the MIT `LICENSE`, public-safe ignore files, Dependabot configuration, and a GHCR publishing workflow are present.
-- The workflow builds `linux/amd64` and `linux/arm64`, publishes compatibility tags from `main`, publishes release tags from `v*` Git tags, and intentionally does not publish `latest`.
+- The workflow builds `linux/amd64` and `linux/arm64`, publishes compatibility tags from `main`, publishes release tags from bare semantic-version Git tags, and intentionally does not publish `latest`.
+- Release Git tags use bare semantic versions such as `1.0.0`, matching the repository's `VERSION` file and README version section.
+- The compatibility images have been published publicly at `ghcr.io/konghack/php`.
+- Dependabot monitors GitHub Actions only; Docker base tags are refreshed by scheduled image builds instead of cross-version update pull requests.
 - A sensitive-string scan found no private organization names, internal infrastructure, credentials, tokens, or private filesystem paths.
-- The user-staged `.gitignore` remains staged; all files created or changed during the publication pass remain unstaged/untracked for review.
 
 ## Important Technical Findings
 
@@ -58,8 +60,6 @@ FROM ghcr.io/konghack/php:8.4
 
 ## Next Steps
 
-1. Review the working tree and create the repository's first commit when approved.
-2. Push `main` and confirm the multi-platform GitHub Actions build publishes both compatibility tags.
-3. After the first publish, set `ghcr.io/konghack/php` package visibility to Public in the GitHub organization package settings.
-4. Verify anonymous pulls for `8.4` and `8.5`, then create the first `vX.Y.Z` release tag when ready.
-5. Repeat the sensitive-information audit immediately before making the repository public.
+1. Commit and push the bare-semantic-version workflow and documentation changes.
+2. Run `gittag '1.0.0'` to update the version files, create the first release tag, and push it.
+3. Confirm that the release workflow publishes `8.4-1.0.0` and `8.5-1.0.0`.

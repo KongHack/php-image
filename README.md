@@ -4,7 +4,7 @@ Reusable PHP-FPM base images for KongHack projects and other PHP applications.
 The images are published to the GitHub Container Registry under the MIT License.
 
 ### Version
-1.0.2
+1.0.3
 
 ## Supported images
 
@@ -94,9 +94,8 @@ configuration, and Composer installation during the build.
 
 ## Publishing
 
-The GitHub Actions workflow validates pull requests and publishes multi-platform
-`linux/amd64` and `linux/arm64` images for the `main` branch, scheduled maintenance
-builds, and releases.
+The GitHub Actions workflow validates pull requests and publishes `linux/amd64`
+images for the `main` branch, scheduled maintenance builds, and releases.
 
 - A build of the default branch updates `8.4` and `8.5`.
 - A Git tag such as `1.0.0` publishes `8.4-1.0.0` and `8.5-1.0.0`.

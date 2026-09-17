@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 
 
+## [1.0.3](https://github.com/KongHack/php-image/releases/tag/1.0.3)
+- Publish images for `linux/amd64` only and remove ARM emulation from the build workflow.
+
+
 ## [1.0.2](https://github.com/KongHack/php-image/releases/tag/1.0.2)
 - Add OpenSSH Client to install stack. Use case is composer updates without dist packages
 

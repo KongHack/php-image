@@ -4,7 +4,7 @@ Reusable PHP-FPM base images for KongHack projects and other PHP applications.
 The images are published to the GitHub Container Registry under the MIT License.
 
 ### Version
-1.0.1
+1.0.2
 
 ## Supported images
 

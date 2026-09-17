@@ -26,6 +26,7 @@ RUN apt-get update \
       git \
       mariadb-client \
       unzip \
+      openssh-client \
  && rm -rf /var/lib/apt/lists/*
 
 # PHPIZE_DEPS must be word-split. The final smoke test catches missing runtime
